@@ -1,0 +1,18 @@
+java:
+  path: java
+  args:
+   - "-server"
+   - "-XX:NewRatio=3"
+   - "-Xmx4096M"
+   - "-Xms256M"
+   - "-XX:+UseConcMarkSweepGC"
+   - "-XX:+UseParNewGC"
+   - "-XX:+CMSIncrementalPacing"
+   - "-XX:ParallelGCThreads=2"
+   - "-XX:+AggressiveOpts"
+   - "-Djava.net.preferIPv4Stack=true"
+jar:
+  path: craftbukkit.jar
+  args: [nogui]
+env:
+  TEST: WHATEVER
