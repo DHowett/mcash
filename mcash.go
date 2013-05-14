@@ -6,11 +6,13 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"fmt"
 )
 
 func main() {
 	sockdirPtr := flag.String("sockdir", ".", "socket directory")
 	tagPtr := flag.String("tag", "minecraft", "socket name")
+	sendPtr := flag.String("send", "", "text to send")
 	flag.Parse()
 
 	stdinPath := filepath.Join(*sockdirPtr, "_"+*tagPtr+"_stdin.fifo")
@@ -19,6 +21,11 @@ func main() {
 	stdinFifo, err := os.OpenFile(stdinPath, os.O_WRONLY, 0)
 	if err != nil {
 		log.Fatalln("Error opening " + stdinPath + ": " + err.Error())
+	}
+
+	if *sendPtr != "" {
+		fmt.Println(stdinFifo, *sendPtr)
+		stdinFifo.Close()
 	}
 
 	stdoutFifo, err := os.OpenFile(stdoutPath, os.O_RDONLY, 0)
