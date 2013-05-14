@@ -26,6 +26,7 @@ func main() {
 	if *sendPtr != "" {
 		fmt.Fprintln(stdinFifo, *sendPtr)
 		stdinFifo.Close()
+		os.Exit(0)
 	}
 
 	stdoutFifo, err := os.OpenFile(stdoutPath, os.O_RDONLY, 0)
