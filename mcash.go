@@ -2,11 +2,11 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"path/filepath"
-	"fmt"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 	}
 
 	if *sendPtr != "" {
-		fmt.Println(stdinFifo, *sendPtr)
+		fmt.Fprintln(stdinFifo, *sendPtr)
 		stdinFifo.Close()
 	}
 
